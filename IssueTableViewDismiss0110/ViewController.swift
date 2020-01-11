@@ -22,23 +22,14 @@ class ViewController: UIViewController {
         vc.modalPresentationCapturesStatusBarAppearance = true
         vc.delegate = self
 
-//        vc.dismissHandler = { controller in
-//            NSLog("start to dismiss")
-//            controller.dismiss(animated: false) {
-//                NSLog("dismissed")
-//                print("----")
-//            }
-//        }
-
         present(vc, animated: false, completion: nil)
     }
-
 }
 
 extension ViewController: TestViewControllerDelegate {
     func dismissController(_ controller: TestViewController) {
-        NSLog("start to dismiss")
-        controller.dismiss(animated: true) {
+        NSLog("begin to dismiss")
+        controller.dismiss(animated: false) {
             NSLog("dismissed")
         }
     }

@@ -16,12 +16,10 @@ class TestViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
-    var dismissHandler: ((_ controller: TestViewController) -> Void)?
-
     weak var delegate: TestViewControllerDelegate?
 
     deinit {
-        NSLog("deinit TestViewController")
+        NSLog("deinit")
         print("-")
     }
 
@@ -34,16 +32,8 @@ class TestViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-//        view.backgroundColor = .clear
         view.backgroundColor = UIColor.black.withAlphaComponent(0.25)
-
-//        UIView.animate(withDuration: 0.2, animations: { [weak self] in
-//            guard let self = self else { return }
-//            self.view.backgroundColor = UIColor.black.withAlphaComponent(0.25)
-//        })
     }
-
-    
 }
 
 extension TestViewController: UITableViewDataSource {
@@ -60,12 +50,16 @@ extension TestViewController: UITableViewDataSource {
 extension TestViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.modalTransitionStyle = .crossDissolve
-//        NSLog("start to dismiss")
-//        dismiss(animated: false) {
-//            NSLog("dismissed")
-//        }
 
-//        self.dismissHandler?(self)
+        // dismiss from presenting view-controller
         self.delegate?.dismissController(self)
+
+        /*
+        // dismiss from(within) self
+        NSLog("start to dismiss")
+        dismiss(animated: false) {
+            NSLog("dismissed")
+        }
+         */
     }
 }
